@@ -1,3 +1,19 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu side="start" menuId="first" type="push">
+    <ion-header>
+      <ion-toolbar color="medium" translucent>
+        <ion-title><ion-icon name="compass"></ion-icon> MENU</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="closeFirst()"><ion-icon name="home" slot="start"></ion-icon><a [routerLink]="['']">HOME</a></ion-item>
+        <ion-item (click)="closeFirst()"><ion-icon name="information-circle-outline" slot="start"></ion-icon><a [routerLink]="['about']">ABOUT</a></ion-item>
+        <ion-item (click)="closeFirst()"><ion-icon name="cart" slot="start"></ion-icon><a [routerLink]="['shopping']">ITEMS</a></ion-item>
+        <ion-item (click)="closeFirst()"><ion-icon name="person" slot="start"></ion-icon><a [routerLink]="['customers']">CUSTOMERS</a></ion-item>
+        <ion-item (click)="closeFirst()"><ion-icon name="create" slot="start"></ion-icon><a [routerLink]="[ 'register' ]">REGISTER</a></ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
 </ion-app>

@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{task}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registrationForm" (ngSubmit)="update ? updateCustomer(): registerCustomer()" class="ion-padding-start"> 
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input autocapitalize required formControlName="name" value="{{cust.name}}" inputmode="text"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of error_messages.name">
+        <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Date of Birth: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime inputmode="text" value="{{cust.dob}}" placeholder="Click me to input date" display-format="DD.MM.YYYY" required formControlName="dob" max="1999"></ion-datetime>
+      </ion-item>
+      <div *ngFor="let error of error_messages.dob">
+        <ng-container *ngIf="dob.hasError(error.type) && (dob.dirty || dob.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+      
+      <ion-list>
+        <ion-radio-group formControlName="gender" value="{{cust.gender}}">
+          <ion-label position="fixed" padding>Gender: <ion-text color="danger">*</ion-text></ion-label>
+          <ion-item>
+            <ion-label style="font-weight:normal">Male</ion-label>
+            <ion-radio value="M" slot="start"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label style="font-weight:normal">Female</ion-label>
+            <ion-radio value="F" slot="start"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+      <div *ngFor="let error of error_messages.gender">
+        <ng-container *ngIf="gender.hasError(error.type) && gender.touched">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+      
+      <ion-item button color="light" expand="block" (click)="presentModal()" slot="start">
+        <ion-label>AVATAR: </ion-label>
+        <ion-badge [color]="avacol" mode="ios">{{myavatext}}</ion-badge>
+        <ion-avatar slot="end">
+          <ion-img [src]="avaimage"></ion-img>
+         </ion-avatar>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label position="floating">Email: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required formControlName="email" value="{{cust.email}}" placeholder="Ex. jacob@hillary.com" inputmode="email"></ion-input>
+      </ion-item>
+      <div *ngFor="let error of error_messages.email">
+        <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+          <small class="error-message">{{error.message}}</small>
+        </ng-container>
+      </div>
+
+    </ion-list>
+
+    <ion-button *ngIf="!update" color="primary" type="submit" [disabled]="registrationForm.invalid">
+      Register <ion-icon slot="end" name="create"></ion-icon>
+    </ion-button>
+    <ion-button *ngIf="update" color="warning" type="submit" [disabled]="registrationForm.invalid">
+      Update <ion-icon slot="end" name="brush"></ion-icon>
+    </ion-button>
+    <ion-button color="medium" type="reset" [disabled]="registrationForm.pristine">
+      Reset <ion-icon slot="end" name="trash"></ion-icon>
+    </ion-button>
+
+  </form>
+</ion-content>

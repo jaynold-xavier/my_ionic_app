@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>My Details</ion-title>
+    <ion-button color="danger" (click)="closePopOver()" slot="end">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle><img src="http://api.adorable.io/avatars/face/{{(cust | async)?.avatar_id}}" style="width: 100%;"></ion-card-subtitle>
+      <ion-card-title style="text-decoration: underline; text-decoration-color: coral;">My Details</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>
+          <strong>Name: </strong> {{(cust | async)?.name}} <br>
+          <strong>Date of Birth: </strong> {{(cust | async)?.dob}} <br>
+          <strong>Email: </strong> {{(cust | async)?.email}} <br>
+          <strong>Gender: </strong> {{(cust | async)?.gender}} <br>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
